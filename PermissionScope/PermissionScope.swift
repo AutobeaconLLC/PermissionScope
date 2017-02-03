@@ -36,7 +36,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     /// Color for the permission buttons' border color.
     public var permissionButtonBorderColor = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
     /// Width for the permission buttons.
-    public var permissionButtonBorderWidth  : CGFloat = 1
+    public var permissionButtonΒorderWidth  : CGFloat = 1
     /// Corner radius for the permission buttons.
     public var permissionButtonCornerRadius : CGFloat = 6
     /// Color for the permission labels' text color.
@@ -326,7 +326,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
         button.setTitleColor(permissionButtonTextColor, for: .normal)
         button.titleLabel?.font = buttonFont
 
-        button.layer.borderWidth = permissionButtonBorderWidth
+        button.layer.borderWidth = permissionButtonΒorderWidth
         button.layer.borderColor = permissionButtonBorderColor.cgColor
         button.layer.cornerRadius = permissionButtonCornerRadius
 
@@ -998,7 +998,9 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     */
     @objc public func show(_ authChange: authClosureType? = nil, cancelled: cancelClosureType? = nil) {
         assert(!configuredPermissions.isEmpty, "Please add at least one permission")
-
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.appForegroundedAfterSettings), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
         onAuthChange = authChange
         onCancel = cancelled
         
@@ -1151,8 +1153,6 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
         alert.addAction(UIAlertAction(title: "Show me".localized,
             style: .default,
             handler: { action in
-                NotificationCenter.default.addObserver(self, selector: #selector(self.appForegroundedAfterSettings), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-                
                 let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
                 UIApplication.shared.openURL(settingsUrl!)
         }))
@@ -1185,8 +1185,6 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
         alert.addAction(UIAlertAction(title: "Show me".localized,
             style: .default,
             handler: { action in
-                NotificationCenter.default.addObserver(self, selector: #selector(self.appForegroundedAfterSettings), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-                
                 let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
                 UIApplication.shared.openURL(settingsUrl!)
         }))
