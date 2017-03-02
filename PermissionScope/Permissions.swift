@@ -47,6 +47,10 @@ public typealias requestPermissionShowAlert     = (PermissionType) -> Void
     public let type: PermissionType = .camera
 }
 
+@objc public class PhotosPermission: NSObject, Permission {
+    public let type: PermissionType = .photos
+}
+
 @objc public class BluetoothPermission: NSObject, Permission {
     public let type: PermissionType = .bluetooth
 }
