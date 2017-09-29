@@ -25,7 +25,7 @@ class ViewController: UIViewController {
 //            message: "We use this to steal\r\nyour friends")
 //        multiPscope.addPermission(NotificationsPermission(notificationCategories: nil),
 //            message: "We use this to send you\r\nspam and love notes")
-        multiPscope.addPermission(LocationWhileInUsePermission(),
+        multiPscope.addPermission(LocationAlwaysPermission(),
             message: "We use this to track\r\nwhere you live")
 
         // Other example permissions
