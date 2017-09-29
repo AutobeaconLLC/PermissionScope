@@ -21,10 +21,10 @@ class ViewController: UIViewController {
         singlePscope.addPermission(NotificationsPermission(notificationCategories: nil),
             message: "We use this to send you\r\nspam and love notes")
 
-        multiPscope.addPermission(ContactsPermission(),
-            message: "We use this to steal\r\nyour friends")
-        multiPscope.addPermission(NotificationsPermission(notificationCategories: nil),
-            message: "We use this to send you\r\nspam and love notes")
+//        multiPscope.addPermission(ContactsPermission(),
+//            message: "We use this to steal\r\nyour friends")
+//        multiPscope.addPermission(NotificationsPermission(notificationCategories: nil),
+//            message: "We use this to send you\r\nspam and love notes")
         multiPscope.addPermission(LocationWhileInUsePermission(),
             message: "We use this to track\r\nwhere you live")
 
@@ -41,19 +41,19 @@ class ViewController: UIViewController {
     }
     
     // an example of how to use the unified permissions API
-    func checkContacts() {
-        switch PermissionScope().statusContacts() {
-        case .unknown:
-            // ask
-            PermissionScope().requestContacts()
-        case .unauthorized, .disabled:
-            // bummer
-            return
-        case .authorized:
-            // thanks!
-            return
-        }
-    }
+//    func checkContacts() {
+//        switch PermissionScope().statusContacts() {
+//        case .unknown:
+//            // ask
+//            PermissionScope().requestContacts()
+//        case .unauthorized, .disabled:
+//            // bummer
+//            return
+//        case .authorized:
+//            // thanks!
+//            return
+//        }
+//    }
     
     @IBAction func singlePerm() {
         singlePscope.show(
