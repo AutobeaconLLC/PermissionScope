@@ -23,11 +23,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Need to use your location</string>
+	<string>always and when in use</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Need to use your location</string>
+	<string>always</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need to use your location</string>
+	<string>when in use</string>
 	<key>CFBundleDisplayName</key>
 	<string></string>
 	<key>LSApplicationCategoryType</key>

@@ -12,6 +12,9 @@ import PermissionScope
 class ViewController: UIViewController {
     let singlePscope = PermissionScope()
     let multiPscope = PermissionScope()
+    let multiPscope2 = PermissionScope()
+    let multiPscope3 = PermissionScope()
+
     let noUIPscope = PermissionScope()
 
     override func viewDidLoad() {
@@ -21,16 +24,21 @@ class ViewController: UIViewController {
         singlePscope.addPermission(NotificationsPermission(notificationCategories: nil),
             message: "We use this to send you\r\nspam and love notes")
 
-//        multiPscope.addPermission(ContactsPermission(),
-//            message: "We use this to steal\r\nyour friends")
-//        multiPscope.addPermission(NotificationsPermission(notificationCategories: nil),
-//            message: "We use this to send you\r\nspam and love notes")
+        multiPscope.addPermission(NotificationsPermission(notificationCategories: nil),
+            message: "We use this to send you\r\nspam and love notes")
         multiPscope.addPermission(LocationAlwaysPermission(),
-            message: "We use this to track\r\nwhere you live")
+            message: "We use this to always track\r\nwhere you live")
+        multiPscope.addPermission(LocationWhileInUsePermission(),
+                                  message: "We use this to sometimes track\r\nwhere you live")
+
+        multiPscope2.addPermission(CameraPermission(),
+                                  message: "We are also watching you while you sleep")
+        multiPscope2.addPermission(PhotosPermission(),
+                                  message: "We use this to find some compromising evidence agaisnt you")
 
         // Other example permissions
-//        multiPscope.addPermission(MicrophonePermission(),message: "We can hear you")
-//        multiPscope.addPermission(BluetoothPermission(), message: "We use this to drain your battery")
+        multiPscope3.addPermission(MicrophonePermission(),message: "We can hear you")
+        multiPscope3.addPermission(BluetoothPermission(), message: "We use this to drain your battery")
 
         noUIPscope.addPermission(NotificationsPermission(notificationCategories: nil), message: "notifications")
         noUIPscope.addPermission(MicrophonePermission(), message: "microphone")
@@ -77,6 +85,27 @@ class ViewController: UIViewController {
         )
     }
 
+    @IBAction func multiPerms2(_ sender: Any) {
+        multiPscope2.show(
+            { finished, results in
+                print("got results \(results)")
+        },
+            cancelled: { results in
+                print("thing was cancelled")
+        }
+        )
+    }
+
+    @IBAction func multiPerms3(_ sender: Any) {
+        multiPscope3.show(
+            { finished, results in
+                print("got results \(results)")
+        },
+            cancelled: { results in
+                print("thing was cancelled")
+        }
+        )
+    }
     @IBAction func noUIPerm() {
         noUIPscope.requestNotifications()
     }

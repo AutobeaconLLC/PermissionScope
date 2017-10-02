@@ -604,7 +604,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     /**
     Requests access to the Microphone, if necessary.
     */
-    public func requestMicrophone() {
+    @objc public func requestMicrophone() {
         let status = statusMicrophone()
         switch status {
         case .unknown:
@@ -642,7 +642,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     /**
     Requests access to the Camera, if necessary.
     */
-    public func requestCamera() {
+    @objc public func requestCamera() {
         let status = statusCamera()
         switch status {
         case .unknown:
@@ -681,7 +681,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     /**
      Requests access to Photos, if necessary.
      */
-    public func requestPhotos() {
+    @objc public func requestPhotos() {
         let status = statusPhotos()
         switch status {
         case .unknown:
@@ -743,7 +743,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     /**
     Requests access to Bluetooth, if necessary.
     */
-    public func requestBluetooth() {
+    @objc public func requestBluetooth() {
         let status = statusBluetooth()
         switch status {
         case .disabled:
