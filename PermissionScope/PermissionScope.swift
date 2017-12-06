@@ -628,7 +628,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     - returns: Permission status for the requested type.
     */
     public func statusCamera() -> PermissionStatus {
-        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         switch status {
         case .authorized:
             return .authorized
@@ -646,7 +646,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
         let status = statusCamera()
         switch status {
         case .unknown:
-            AVCaptureDevice.requestAccess(for: AVMediaType.video,
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo,
                 completionHandler: { granted in
                     self.detectAndCallback()
             })
@@ -1028,25 +1028,27 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     to notifiy the parent app.
     */
     func detectAndCallback() {
-        DispatchQueue.main.async {
-            // compile the results and pass them back if necessary
-            if let onAuthChange = self.onAuthChange {
-                self.getResultsForConfig({ results in
-                    self.allAuthorized({ areAuthorized in
-                        onAuthChange(areAuthorized, results)
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + .milliseconds(100),
+            execute: {
+                // compile the results and pass them back if necessary
+                if let onAuthChange = self.onAuthChange {
+                    self.getResultsForConfig({ results in
+                        self.allAuthorized({ areAuthorized in
+                            onAuthChange(areAuthorized, results)
+                        })
                     })
-                })
-            }
-            
-            self.view.setNeedsLayout()
-
-            // and hide if we've sucessfully got all permissions
-            self.allAuthorized({ areAuthorized in
-                if areAuthorized {
-                    self.hide()
                 }
-            })
-        }
+                
+                self.view.setNeedsLayout()
+                
+                // and hide if we've sucessfully got all permissions
+                self.allAuthorized({ areAuthorized in
+                    if areAuthorized {
+                        self.hide()
+                    }
+                })
+        })
     }
     
     /**
